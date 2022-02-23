@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class TodoController {
     @Autowired
     private TodoService service;
@@ -23,12 +24,12 @@ public class TodoController {
         }
         throw new RuntimeException("No existe el id para actualizar");
     }
-    @DeleteMapping("api/delete/{id}")
-    public void delete(@RequestParam("id")Long id){
+    @DeleteMapping(value = "api/delete/{id}")
+    public void delete(@PathVariable("id")Long id){
         service.delete(id);
     }
     @GetMapping(value = "api/{id}/get")
-    public Todo get(@RequestParam("id") Long id) {
+    public Todo get(@PathVariable("id") Long id) {
         return service.get(id);
     }
 
